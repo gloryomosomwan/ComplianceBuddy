@@ -3,23 +3,26 @@
 <h2>My Vehicles</h2>
 
 <div class="container">
-  <table class="table table-bordered">
+  <table class="table">
     <thead class="table-light">
       <tr>
-        <th>Vin</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
+        <th class="cell">Vin</th>
+        <th class="cell">Make</th>
+        <th class="cell">Model</th>
+        <th class="cell">Year</th>
       </tr>
     </thead>
     <tbody>
       @foreach (var item in Model)
       {
-        <tr>
-          <td>@item.Vin #</td>
-          <td>@item.Make</td>
-          <td>@item.Model</td>
-          <td>@item.Year</td>
+        <tr style="border: none;">
+          <td class="cell">@item.Vin</td>
+          <td class="cell">@item.Make</td>
+          <td class="cell">@item.Model</td>
+          <td class="cell">@item.Year</td>
+          <td class="cell">
+            <button class="btn btn-primary">Edit</button>
+          </td>
         </tr>
       }
     </tbody>
