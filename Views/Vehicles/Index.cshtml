@@ -1,0 +1,27 @@
+@model IEnumerable<ComplianceBuddy.Models.Vehicle>
+
+<h2>My Vehicles</h2>
+
+<div class="container">
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Vin</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+          <td>@item.Vin #</td>
+          <td>@item.Make</td>
+          <td>@item.Model</td>
+          <td>@item.Year</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
