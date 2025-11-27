@@ -6,8 +6,8 @@ namespace ComplianceBuddy.Data.Service
   public class VehiclesService : IVehiclesService
   {
 
-    private readonly ComplianceBuddyContext _context;
-    public VehiclesService(ComplianceBuddyContext context)
+    private readonly ApplicationDbContext _context;
+    public VehiclesService(ApplicationDbContext context)
     {
       _context = context;
     }
