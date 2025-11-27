@@ -22,10 +22,8 @@
           <td class="cell">@item.Year</td>
 
           <td class="cell">
-            <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-          </td>
-          <td class="cell">
-            <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
           </td>
 
         </tr>

@@ -39,3 +39,7 @@ body {
 .cell {
   border: none;
 }
+
+.table-button {
+  margin: 0 5px
+}
