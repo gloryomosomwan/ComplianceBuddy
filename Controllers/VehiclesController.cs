@@ -33,5 +33,26 @@ namespace ComplianceBuddy.Controllers
       }
       return View(vehicle);
     }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+      var vehicle = await _vehiclesService.GetById(id);
+      if (vehicle == null)
+      {
+        return NotFound();
+      }
+      return View(vehicle);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Update(Vehicle vehicle)
+    {
+      if (ModelState.IsValid)
+      {
+        await _vehiclesService.Update(vehicle);
+        return RedirectToAction("Index");
+      }
+      return View(vehicle);
+    }
   }
 }

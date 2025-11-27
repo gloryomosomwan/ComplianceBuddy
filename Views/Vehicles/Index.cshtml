@@ -20,9 +20,11 @@
           <td class="cell">@item.Make</td>
           <td class="cell">@item.Model</td>
           <td class="cell">@item.Year</td>
+
           <td class="cell">
-            <button class="btn btn-primary">Edit</button>
+            <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
           </td>
+
         </tr>
       }
     </tbody>

@@ -6,5 +6,7 @@ namespace ComplianceBuddy.Data.Service
   {
     Task<IEnumerable<Vehicle>> GetAll();
     Task Add(Vehicle vehicle);
+    Task<Vehicle?> GetById(int id);
+    Task Update(Vehicle vehicle);
   }
 }

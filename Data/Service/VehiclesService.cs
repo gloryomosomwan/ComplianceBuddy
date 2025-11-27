@@ -23,5 +23,16 @@ namespace ComplianceBuddy.Data.Service
       var vehicles = await _context.Vehicles.ToListAsync();
       return vehicles;
     }
+
+    public async Task<Vehicle?> GetById(int id)
+    {
+      return await _context.Vehicles.FindAsync(id);
+    }
+
+    public async Task Update(Vehicle vehicle)
+    {
+      _context.Vehicles.Update(vehicle);
+      await _context.SaveChangesAsync();
+    }
   }
 }
