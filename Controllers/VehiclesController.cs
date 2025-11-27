@@ -75,5 +75,16 @@ namespace ComplianceBuddy.Controllers
 
       return View(vehicleToUpdate);
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+      var vehicle = await _vehiclesService.GetById(id);
+      if (vehicle == null)
+      {
+        return NotFound();
+      }
+      await _vehiclesService.Delete(vehicle);
+      return RedirectToAction("Index");
+    }
   }
 }

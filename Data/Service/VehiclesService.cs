@@ -34,5 +34,11 @@ namespace ComplianceBuddy.Data.Service
       _context.Vehicles.Update(vehicle);
       await _context.SaveChangesAsync();
     }
+
+    public async Task Delete(Vehicle vehicle)
+    {
+      _context.Vehicles.Remove(vehicle);
+      await _context.SaveChangesAsync();
+    }
   }
 }
