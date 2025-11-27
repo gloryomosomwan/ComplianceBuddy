@@ -44,15 +44,36 @@ namespace ComplianceBuddy.Controllers
       return View(vehicle);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Update(Vehicle vehicle)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(int id)
     {
-      if (ModelState.IsValid)
+      var vehicleToUpdate = await _vehiclesService.GetById(id);
+      if (vehicleToUpdate == null)
       {
-        await _vehiclesService.Update(vehicle);
-        return RedirectToAction("Index");
+        return NotFound();
       }
-      return View(vehicle);
+
+      if (await TryUpdateModelAsync<Vehicle>(
+            vehicleToUpdate,
+            "",
+            v => v.Vin,
+            v => v.Make,
+            v => v.Model,
+            v => v.Year))
+      {
+        try
+        {
+          await _vehiclesService.Update(vehicleToUpdate);
+          return RedirectToAction("Index");
+        }
+        catch
+        {
+          ModelState.AddModelError("", "Unable to save changes. Try again.");
+        }
+      }
+
+      return View(vehicleToUpdate);
     }
   }
 }
