@@ -23,6 +23,12 @@ namespace ComplianceBuddy.Controllers
       return View();
     }
 
+    public IActionResult Lmao()
+    {
+      Console.WriteLine("Helo!");
+      return RedirectToAction("Create");
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(Vehicle vehicle)
     {
