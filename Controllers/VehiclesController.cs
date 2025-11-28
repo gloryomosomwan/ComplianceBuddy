@@ -1,5 +1,6 @@
 using ComplianceBuddy.Data.Service;
 using ComplianceBuddy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace ComplianceBuddy.Controllers
       _vehiclesService = vehiclesService;
       _userManager = userManager;
     }
+    [Authorize]
     public async Task<IActionResult> Index()
     {
       var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -30,6 +32,7 @@ namespace ComplianceBuddy.Controllers
       }
     }
 
+    [Authorize]
     public async Task<IActionResult> Create()
     {
       var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -41,6 +44,7 @@ namespace ComplianceBuddy.Controllers
       return View();
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create(Vehicle vehicle)
     {
@@ -52,6 +56,7 @@ namespace ComplianceBuddy.Controllers
       return View(vehicle);
     }
 
+    [Authorize]
     public async Task<IActionResult> Edit(int id)
     {
       var vehicle = await _vehiclesService.GetById(id);
@@ -62,6 +67,7 @@ namespace ComplianceBuddy.Controllers
       return View(vehicle);
     }
 
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id)
@@ -94,6 +100,7 @@ namespace ComplianceBuddy.Controllers
       return View(vehicleToUpdate);
     }
 
+    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
       var vehicle = await _vehiclesService.GetById(id);

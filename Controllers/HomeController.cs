@@ -1,11 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ComplianceBuddy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ComplianceBuddy.Controllers;
 
 public class HomeController : Controller
 {
+    [Authorize]
     public IActionResult Index()
     {
         return View();
