@@ -17,25 +17,27 @@ namespace ComplianceBuddy.Controllers
     }
     public async Task<IActionResult> Index()
     {
-      var vehicles = await _vehiclesService.GetAll();
-      return View(vehicles);
+      var user = await _userManager.GetUserAsync(HttpContext.User);
+      if (user != null)
+      {
+        var vehicles = await _vehiclesService.GetAll(user.Id);
+        return View(vehicles);
+      }
+      else
+      {
+        var vehicles = new List<Vehicle>();
+        return View(vehicles);
+      }
     }
 
     public async Task<IActionResult> Create()
     {
-      var userManager = HttpContext.RequestServices.GetService<UserManager<IdentityUser>>();
-      if (userManager == null)
-      {
-        return BadRequest("User manager unavailable");
-      }
-      var user = await userManager.GetUserAsync(HttpContext.User);
+      var user = await _userManager.GetUserAsync(HttpContext.User);
       if (user == null)
       {
         return NotFound("User not found");
       }
-      var userId = user.Id;
-      Console.WriteLine(userId.ToString());
-      ViewData["UserId"] = userId;
+      ViewData["UserId"] = user.Id;
       return View();
     }
 

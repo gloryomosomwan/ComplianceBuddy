@@ -18,9 +18,11 @@ namespace ComplianceBuddy.Data.Service
       await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Vehicle>> GetAll()
+    public async Task<IEnumerable<Vehicle>> GetAll(string userId)
     {
-      var vehicles = await _context.Vehicles.ToListAsync();
+      var vehicles = await _context.Vehicles
+      .Where(vehicle => vehicle.UserId == userId)
+      .ToListAsync();
       return vehicles;
     }
 
