@@ -10,7 +10,7 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Index()
     {
-        return View();
+        return RedirectToAction("Index", "Vehicles");
     }
 
     public IActionResult Privacy()
