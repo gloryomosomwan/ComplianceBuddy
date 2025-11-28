@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
 namespace ComplianceBuddy.Models
 {
@@ -15,9 +14,6 @@ namespace ComplianceBuddy.Models
     [Required]
     public int Year { get; set; }
 
-    // Foreign key for the user
-    public string UserId { get; set; } = null;
-    // Navigation property
-    public IdentityUser User { get; set; }
+    public string UserId { get; set; } = null!;
   }
 }

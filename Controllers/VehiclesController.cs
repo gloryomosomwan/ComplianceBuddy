@@ -23,10 +23,17 @@ namespace ComplianceBuddy.Controllers
 
     public async Task<IActionResult> Create()
     {
-      var userManager = HttpContext.RequestServices.GetService(typeof(UserManager<IdentityUser>))
-      as UserManager<IdentityUser>;
-      IdentityUser usr = await userManager.GetUserAsync(HttpContext.User);
-      var userId = userManager.GetUserIdAsync(usr);
+      var userManager = HttpContext.RequestServices.GetService<UserManager<IdentityUser>>();
+      if (userManager == null)
+      {
+        return BadRequest("User manager unavailable");
+      }
+      var user = await userManager.GetUserAsync(HttpContext.User);
+      if (user == null)
+      {
+        return NotFound("User not found");
+      }
+      var userId = user.Id;
       Console.WriteLine(userId.ToString());
       ViewData["UserId"] = userId;
       return View();
