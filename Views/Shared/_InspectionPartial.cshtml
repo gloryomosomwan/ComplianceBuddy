@@ -1,0 +1,28 @@
+<h2>Inspections</h2>
+<table class="table">
+  <thead class="table-light">
+    <tr>
+      <th class="cell">Vin</th>
+      <th class="cell">Date</th>
+      <th class="cell">Passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    @* @foreach (var item in Model)
+            {
+                <tr style="border: none;">
+                    <td class="cell">@item.Vin</td>
+                    <td class="cell">@item.Make</td>
+                    <td class="cell">@item.Model</td>
+                    <td class="cell">@item.Year</td>
+
+                    <td class="cell">
+                        <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+
+                </tr>
+            } *@
+  </tbody>
+</table>
+<a class="btn btn-primary" asp-controller="Index" asp-action="CreateInspection">Add Inspection</a>
