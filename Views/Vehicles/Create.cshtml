@@ -19,6 +19,8 @@
       <label asp-for="Year" class="form-label"></label>
       <input asp-for="Year" class="form-control" />
     </div>
+    @* <p>@ViewData["UserId"]</p> *@
+    <input asp-for="UserId" type="hidden" value="@ViewData["UserId"]" />
     <button type="submit" class="btn btn-primary submit-button">Add Vehicle</button>
   </form>
 </div>

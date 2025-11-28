@@ -16,8 +16,8 @@ namespace ComplianceBuddy.Models
     public int Year { get; set; }
 
     // Foreign key for the user
-    public string UserId { get; set; } = null!;
+    public string UserId { get; set; } = null;
     // Navigation property
-    public IdentityUser User { get; set; } = null!;
+    public IdentityUser User { get; set; }
   }
 }

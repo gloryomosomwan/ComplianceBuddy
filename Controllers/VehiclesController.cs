@@ -1,5 +1,6 @@
 using ComplianceBuddy.Data.Service;
 using ComplianceBuddy.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComplianceBuddy.Controllers
@@ -8,9 +9,11 @@ namespace ComplianceBuddy.Controllers
   public class VehiclesController : Controller
   {
     private readonly IVehiclesService _vehiclesService;
-    public VehiclesController(IVehiclesService vehiclesService)
+    private readonly UserManager<IdentityUser> _userManager;
+    public VehiclesController(IVehiclesService vehiclesService, UserManager<IdentityUser> userManager)
     {
       _vehiclesService = vehiclesService;
+      _userManager = userManager;
     }
     public async Task<IActionResult> Index()
     {
@@ -18,8 +21,14 @@ namespace ComplianceBuddy.Controllers
       return View(vehicles);
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+      var userManager = HttpContext.RequestServices.GetService(typeof(UserManager<IdentityUser>))
+      as UserManager<IdentityUser>;
+      IdentityUser usr = await userManager.GetUserAsync(HttpContext.User);
+      var userId = userManager.GetUserIdAsync(usr);
+      Console.WriteLine(userId.ToString());
+      ViewData["UserId"] = userId;
       return View();
     }
 
