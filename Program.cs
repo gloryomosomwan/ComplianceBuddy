@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IVehiclesService, VehiclesService>();
+builder.Services.AddScoped<IInspectionsService, InspectionsService>();
 
 var app = builder.Build();
 
