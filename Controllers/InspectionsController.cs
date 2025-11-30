@@ -37,7 +37,7 @@ namespace ComplianceBuddy.Controllers
       if (ModelState.IsValid)
       {
         await _inspectionsService.Add(inspection);
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Home");
       }
       return View(inspection);
     }
