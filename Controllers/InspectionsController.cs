@@ -39,7 +39,24 @@ namespace ComplianceBuddy.Controllers
         await _inspectionsService.Add(inspection);
         return RedirectToAction("Index", "Home");
       }
-      return View(inspection);
+      else
+      {
+        var allErrors = ModelState
+            .Where(kvp => kvp.Value.Errors.Any())
+            .Select(kvp => new
+            {
+              Key = kvp.Key,
+              Errors = kvp.Value.Errors.Select(e => e.ErrorMessage ?? e.Exception?.Message).ToList()
+            }).ToList();
+        foreach (var i in allErrors)
+        {
+          foreach (var j in i.Errors)
+          {
+            Console.WriteLine(j);
+          }
+        }
+        return RedirectToAction("Create");
+      }
     }
 
     [Authorize]
