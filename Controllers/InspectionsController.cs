@@ -16,21 +16,6 @@ namespace ComplianceBuddy.Controllers
       _inspectionsService = inspectionsService;
       _userManager = userManager;
     }
-    [Authorize]
-    public async Task<IActionResult> Index()
-    {
-      var user = await _userManager.GetUserAsync(HttpContext.User);
-      if (user != null)
-      {
-        var inspections = await _inspectionsService.GetAll(user.Id);
-        return View(inspections);
-      }
-      else
-      {
-        var inspections = new List<Inspection>();
-        return View(inspections);
-      }
-    }
 
     [Authorize]
     public async Task<IActionResult> Create()

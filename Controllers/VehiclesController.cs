@@ -16,21 +16,6 @@ namespace ComplianceBuddy.Controllers
       _vehiclesService = vehiclesService;
       _userManager = userManager;
     }
-    [Authorize]
-    public async Task<IActionResult> Index()
-    {
-      var user = await _userManager.GetUserAsync(HttpContext.User);
-      if (user != null)
-      {
-        var vehicles = await _vehiclesService.GetAll(user.Id);
-        return View(vehicles);
-      }
-      else
-      {
-        var vehicles = new List<Vehicle>();
-        return View(vehicles);
-      }
-    }
 
     [Authorize]
     public async Task<IActionResult> Create()
