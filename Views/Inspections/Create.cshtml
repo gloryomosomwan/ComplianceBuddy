@@ -11,10 +11,11 @@
       <label asp-for="Date" class="form-label"></label>
       <input asp-for="Date" class="form-control" />
     </div>
-    <div>
+    @* <div>
       <label asp-for="Passed" class="form-label"></label>
       <input asp-for="Passed" class="form-control" />
-    </div>
+    </div> *@
+    <input asp-for="Passed" type="hidden" value="true" />
     <input asp-for="UserId" type="hidden" value="@ViewData["UserId"]" />
     <button type="submit" class="btn btn-primary submit-button">Add Inspection</button>
   </form>
