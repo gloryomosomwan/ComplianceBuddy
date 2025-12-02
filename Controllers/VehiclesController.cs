@@ -78,7 +78,7 @@ namespace ComplianceBuddy.Controllers
         }
         catch
         {
-          ModelState.AddModelError("", "Unable to save changes. Try again.");
+          ModelState.AddModelError("", "Unable to save changes.");
         }
       }
 
@@ -94,7 +94,7 @@ namespace ComplianceBuddy.Controllers
         return NotFound();
       }
       await _vehiclesService.Delete(vehicle);
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", "Home");
     }
   }
 }

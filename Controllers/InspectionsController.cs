@@ -90,9 +90,7 @@ namespace ComplianceBuddy.Controllers
         catch
         {
           // Log the error (uncomment ex variable name and write a log.)
-          ModelState.AddModelError("", "Unable to save changes. " +
-              "Try again, and if the problem persists, " +
-              "see your system administrator.");
+          ModelState.AddModelError("", "Unable to save changes");
         }
       }
       return View(inspection);
@@ -106,7 +104,8 @@ namespace ComplianceBuddy.Controllers
       {
         return NotFound();
       }
-      return View(inspection);
+      await _inspectionsService.Delete(inspection);
+      return RedirectToAction("Index", "Home");
     }
 
     [Authorize]
