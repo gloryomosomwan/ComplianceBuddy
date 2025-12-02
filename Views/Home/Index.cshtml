@@ -40,7 +40,7 @@
 
                             <td class="cell">
                                 <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Vehicle.Id">Edit</a>
-                                <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Vehicle.Id">Delete</a>
+                                <a class="btn btn-danger table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Vehicle.Id" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete</a>
                             </td>
 
                         </tr>
@@ -75,7 +75,7 @@
                             <td class="cell">@item.Passed</td>
                             <td class="cell">
                                 <a class="btn btn-primary table-button" asp-controller="Inspections" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a class="btn btn-primary table-button" asp-controller="Inspections" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a class="btn btn-danger table-button" asp-controller="Inspections" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this inspection?')">Delete</a>
                             </td>
                         </tr>
                     }
