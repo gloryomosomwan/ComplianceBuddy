@@ -56,7 +56,7 @@
     </div>
     <h2>Inspections</h2>
     <div class="container">
-        @if (Model.Inspections.Count() > 0)
+        @if (Model.Inspections.Count() > 0 && Model.Vehicles.Count() > 0)
         {
             <table class="table">
                 <thead class="table-light">
