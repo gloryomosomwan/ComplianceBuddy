@@ -27,8 +27,20 @@ public class HomeController : Controller
         {
             var vehicles = await _vehiclesService.GetAll(user.Id);
             var inspections = await _inspectionsService.GetAll(user.Id);
-            var vm = new HomeViewModel { vehicles = vehicles, inspections = inspections };
-            return View(vm);
+
+            var twelveMonthsAgo = DateTime.UtcNow.AddMonths(-12);
+            var recentPassedInspections = inspections
+                .Where(i => i.Passed && i.Date >= twelveMonthsAgo)
+                .Select(i => i.Vin)
+                .ToHashSet();
+
+            var vehicleViewModels = vehicles.Select(v => new VehicleViewModel
+            {
+                vehicle = v,
+                isCompliant = recentPassedInspections.Contains(v.Vin)
+            }).ToList();
+
+            return View(new HomeViewModel { vehicles = vehicleViewModels, inspections = inspections });
         }
         else
         {
