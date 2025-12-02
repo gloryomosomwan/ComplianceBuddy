@@ -7,19 +7,23 @@
     <div>
       <label asp-for="Vin" class="form-label"></label>
       <input asp-for="Vin" class="form-control" />
+      <span asp-validation-for="Vin" class="text-danger"></span>
     </div>
     <div>
       <label asp-for="Make" class="form-label"></label>
       <input asp-for="Make" class="form-control" />
+      <span asp-validation-for="Make" class="text-danger"></span>
     </div>
     <div>
       <label asp-for="Model" class="form-label"></label>
       <input asp-for="Model" class="form-control" />
+      <span asp-validation-for="Model" class="text-danger"></span>
     </div>
     <div>
       <label asp-for="Year" class="form-label"></label>
       <input asp-for="Year" class="form-control" />
+      <span asp-validation-for="Year" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
   </form>
 </div>

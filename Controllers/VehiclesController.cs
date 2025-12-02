@@ -63,7 +63,7 @@ namespace ComplianceBuddy.Controllers
         return NotFound();
       }
 
-      if (await TryUpdateModelAsync<Vehicle>(
+      if (await TryUpdateModelAsync(
             vehicleToUpdate,
             "",
             v => v.Vin,
@@ -81,8 +81,7 @@ namespace ComplianceBuddy.Controllers
           ModelState.AddModelError("", "Unable to save changes.");
         }
       }
-
-      return View(vehicleToUpdate);
+      return View("Edit", vehicleToUpdate);
     }
 
     [Authorize]
