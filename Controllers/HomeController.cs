@@ -36,11 +36,11 @@ public class HomeController : Controller
 
             var vehicleViewModels = vehicles.Select(v => new VehicleViewModel
             {
-                vehicle = v,
-                isCompliant = recentPassedInspections.Contains(v.Vin)
+                Vehicle = v,
+                IsCompliant = recentPassedInspections.Contains(v.Vin)
             }).ToList();
 
-            return View(new HomeViewModel { vehicles = vehicleViewModels, inspections = inspections });
+            return View(new HomeViewModel { Vehicles = vehicleViewModels, Inspections = inspections });
         }
         else
         {

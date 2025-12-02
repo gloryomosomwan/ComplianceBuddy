@@ -7,7 +7,7 @@
     <h1 class="display-4">Welcome</h1>
     <h2>My Vehicles</h2>
     <div class="container">
-        @if (Model.vehicles.Count() > 0)
+        @if (Model.Vehicles.Count() > 0)
         {
             <table class="table">
                 <thead class="table-light">
@@ -20,15 +20,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.vehicles)
+                    @foreach (var item in Model.Vehicles)
                     {
                         <tr style="border: none;">
-                            <td class="cell">@item.vehicle.Vin</td>
-                            <td class="cell">@item.vehicle.Make</td>
-                            <td class="cell">@item.vehicle.Model</td>
-                            <td class="cell">@item.vehicle.Year</td>
+                            <td class="cell">@item.Vehicle.Vin</td>
+                            <td class="cell">@item.Vehicle.Make</td>
+                            <td class="cell">@item.Vehicle.Model</td>
+                            <td class="cell">@item.Vehicle.Year</td>
                             <td class="cell">
-                                @if (item.isCompliant)
+                                @if (item.IsCompliant)
                                 {
                                     <span class="badge bg-success">Compliant</span>
                                 }
@@ -39,8 +39,8 @@
                             </td>
 
                             <td class="cell">
-                                <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.vehicle.Id">Edit</a>
-                                <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.vehicle.Id">Delete</a>
+                                <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.Vehicle.Id">Edit</a>
+                                <a class="btn btn-primary table-button" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.Vehicle.Id">Delete</a>
                             </td>
 
                         </tr>
@@ -56,7 +56,7 @@
     </div>
     <h2>Inspections</h2>
     <div class="container">
-        @if (Model.inspections.Count() > 0)
+        @if (Model.Inspections.Count() > 0)
         {
             <table class="table">
                 <thead class="table-light">
@@ -67,7 +67,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.inspections)
+                    @foreach (var item in Model.Inspections)
                     {
                         <tr style="border: none;">
                             <td class="cell">@item.Vin</td>
