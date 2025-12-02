@@ -6,10 +6,12 @@
     <div>
       <label asp-for="Vin" class="form-label"></label>
       <input asp-for="Vin" class="form-control" />
+      <span asp-validation-for="Vin" class="text-danger"></span>
     </div>
     <div>
       <label asp-for="Date" class="form-label"></label>
       <input asp-for="Date" class="form-control" />
+      <span asp-validation-for="Date" class="text-danger"></span>
     </div>
     <div class="form-check my-3">
       <input asp-for="Passed" class="form-check-input" />
