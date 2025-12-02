@@ -3,6 +3,7 @@ using ComplianceBuddy.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ComplianceBuddy.Controllers
 {
@@ -10,10 +11,12 @@ namespace ComplianceBuddy.Controllers
   public class InspectionsController : Controller
   {
     private readonly IInspectionsService _inspectionsService;
+    private readonly IVehiclesService _vehiclesService;
     private readonly UserManager<IdentityUser> _userManager;
-    public InspectionsController(IInspectionsService inspectionsService, UserManager<IdentityUser> userManager)
+    public InspectionsController(IInspectionsService inspectionsService, IVehiclesService vehiclesService, UserManager<IdentityUser> userManager)
     {
       _inspectionsService = inspectionsService;
+      _vehiclesService = vehiclesService;
       _userManager = userManager;
     }
 
@@ -25,6 +28,10 @@ namespace ComplianceBuddy.Controllers
       {
         return NotFound("User not found");
       }
+
+      var vehicles = await _vehiclesService.GetAll(user.Id);
+      ViewData["Vehicles"] = new SelectList(vehicles, "Vin", "Vin");
+
       ViewData["UserId"] = user.Id;
       return View();
     }
