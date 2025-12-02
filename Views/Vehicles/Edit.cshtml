@@ -2,7 +2,7 @@
 
 <div class="container">
   <h2>Edit Vehicle</h2>
-  <form asp-action="Update" method="post" asp-route-id="@Model.Id">
+  <form asp-action="ConfirmEdit" method="post" asp-route-id="@Model.Id">
     @Html.AntiForgeryToken()
     <div>
       <label asp-for="Vin" class="form-label"></label>

@@ -55,7 +55,7 @@ namespace ComplianceBuddy.Controllers
     [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id)
+    public async Task<IActionResult> ConfirmEdit(int id)
     {
       var vehicleToUpdate = await _vehiclesService.GetById(id);
       if (vehicleToUpdate == null)
@@ -74,7 +74,7 @@ namespace ComplianceBuddy.Controllers
         try
         {
           await _vehiclesService.Update(vehicleToUpdate);
-          return RedirectToAction("Index");
+          return RedirectToAction("Index", "Home");
         }
         catch
         {

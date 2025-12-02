@@ -73,7 +73,7 @@ namespace ComplianceBuddy.Controllers
     [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id, Inspection inspection)
+    public async Task<IActionResult> ConfirmEdit(int id, Inspection inspection)
     {
       if (id != inspection.Id)
       {
@@ -85,7 +85,7 @@ namespace ComplianceBuddy.Controllers
         try
         {
           await _inspectionsService.Update(inspection);
-          return RedirectToAction("Index");
+          return RedirectToAction("Index", "Home");
         }
         catch
         {
