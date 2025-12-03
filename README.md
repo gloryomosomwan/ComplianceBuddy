@@ -6,7 +6,7 @@ ComplianceBuddy is a web application built with ASP.NET Core MVC designed to hel
 
 - **Backend**: ASP.NET Core MVC, C#
 - **Database**: Entity Framework Core, SQL Server
-- **Frontend**: Razor Pages, Bootstrap 5, HTML5, CSS3
+- **Frontend**: Razor Pages, Bootstrap, HTML, CSS
 - **Authentication**: ASP.NET Core Identity
 
 ## Usage
