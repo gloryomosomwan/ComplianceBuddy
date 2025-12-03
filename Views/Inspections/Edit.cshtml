@@ -1,25 +1,52 @@
 @model ComplianceBuddy.Models.Inspection
 
-<div class="container">
-  <h2>Edit Inspection</h2>
-  <form asp-action="ConfirmEdit" method="post" asp-route-id="@Model.Id">
-    @Html.AntiForgeryToken()
-    <div>
-      <label asp-for="VehicleId" class="form-label"></label>
-      <select asp-for="VehicleId" class="form-control" asp-items="@(ViewData["Vehicles"] as SelectList)">
-        <option value="">-- Select a VIN --</option>
-      </select>
-      <span asp-validation-for="VehicleId" class="text-danger"></span>
+@{
+  ViewData["Title"] = "Edit Inspection";
+}
+
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h1 class="h4 mb-0">@ViewData["Title"]</h1>
+      </div>
+      <div class="card-body">
+        <form asp-action="ConfirmEdit" asp-route-id="@Model.Id">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <input type="hidden" asp-for="Id" />
+          <input type="hidden" asp-for="UserId" />
+
+          <div class="mb-3">
+            <label asp-for="VehicleId" class="form-label">Vehicle</label>
+            <select asp-for="VehicleId" class="form-select" asp-items="@(ViewData["Vehicles"] as SelectList)">
+              <option value="">-- Select a Vehicle --</option>
+            </select>
+            <span asp-validation-for="VehicleId" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label asp-for="Date" class="form-label">Inspection Date</label>
+            <input asp-for="Date" type="date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+          </div>
+          <div class="mb-3 form-check">
+            <input class="form-check-input" type="checkbox" asp-for="Passed" />
+            <label class="form-check-label" asp-for="Passed">Passed Inspection</label>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div>
-      <label asp-for="Date" class="form-label"></label>
-      <input asp-for="Date" class="form-control" />
-      <span asp-validation-for="Date" class="text-danger"></span>
-    </div>
-    <div class="form-check my-3">
-      <input asp-for="Passed" class="form-check-input" />
-      <label asp-for="Passed" class="form-check-label"></label>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
-  </form>
+  </div>
 </div>
+
+@section Scripts {
+  @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+  }
+}
