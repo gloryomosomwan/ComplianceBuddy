@@ -18,8 +18,10 @@ namespace ComplianceBuddy.Models
 
     [Required(ErrorMessage = "Vehicle year is required.")]
     [Range(1900, 2025, ErrorMessage = "Please enter a valid year between 1900 and 2025.")]
-    public int Year { get; set; }
+    public int? Year { get; set; }
 
     public string UserId { get; set; } = null!;
+
+    public ICollection<Inspection> Inspections { get; set; } = new List<Inspection>();
   }
 }

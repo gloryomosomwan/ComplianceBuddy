@@ -40,11 +40,12 @@ namespace ComplianceBuddy.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Vin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Inspections");
                 });
@@ -71,7 +72,8 @@ namespace ComplianceBuddy.Migrations
 
                     b.Property<string>("Vin")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(17)
+                        .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -283,6 +285,17 @@ namespace ComplianceBuddy.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ComplianceBuddy.Models.Inspection", b =>
+                {
+                    b.HasOne("ComplianceBuddy.Models.Vehicle", "Vehicle")
+                        .WithMany("Inspections")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -332,6 +345,11 @@ namespace ComplianceBuddy.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComplianceBuddy.Models.Vehicle", b =>
+                {
+                    b.Navigation("Inspections");
                 });
 #pragma warning restore 612, 618
         }

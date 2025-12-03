@@ -5,9 +5,11 @@
   <form asp-action="ConfirmEdit" method="post" asp-route-id="@Model.Id">
     @Html.AntiForgeryToken()
     <div>
-      <label asp-for="Vin" class="form-label"></label>
-      <input asp-for="Vin" class="form-control" />
-      <span asp-validation-for="Vin" class="text-danger"></span>
+      <label asp-for="VehicleId" class="form-label"></label>
+      <select asp-for="VehicleId" class="form-control" asp-items="@(ViewData["Vehicles"] as SelectList)">
+        <option value="">-- Select a VIN --</option>
+      </select>
+      <span asp-validation-for="VehicleId" class="text-danger"></span>
     </div>
     <div>
       <label asp-for="Date" class="form-label"></label>

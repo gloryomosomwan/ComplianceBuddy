@@ -30,7 +30,7 @@ namespace ComplianceBuddy.Controllers
       }
 
       var vehicles = await _vehiclesService.GetAll(user.Id);
-      ViewData["Vehicles"] = new SelectList(vehicles, "Vin", "Vin");
+      ViewData["Vehicles"] = new SelectList(vehicles, "Id", "Vin");
 
       ViewData["UserId"] = user.Id;
       return View();
@@ -48,6 +48,10 @@ namespace ComplianceBuddy.Controllers
       }
       else
       {
+        // If model is invalid, re-populate the dropdown and return the view with errors.
+        var user = await _userManager.GetUserAsync(HttpContext.User);
+        var vehicles = await _vehiclesService.GetAll(user.Id);
+        ViewData["Vehicles"] = new SelectList(vehicles, "Id", "Vin", inspection.VehicleId);
         // var allErrors = ModelState
         //     .Where(kvp => kvp.Value.Errors.Any())
         //     .Select(kvp => new
@@ -75,33 +79,44 @@ namespace ComplianceBuddy.Controllers
       {
         return NotFound();
       }
+
+      var user = await _userManager.GetUserAsync(HttpContext.User);
+      var vehicles = await _vehiclesService.GetAll(user.Id);
+      ViewData["Vehicles"] = new SelectList(vehicles, "Id", "Vin", inspection.VehicleId);
+
       return View(inspection);
     }
 
     [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ConfirmEdit(int id, Inspection inspection)
+    public async Task<IActionResult> ConfirmEdit(int id)
     {
-      if (id != inspection.Id)
+      var inspectionToUpdate = await _inspectionsService.GetById(id);
+      if (inspectionToUpdate == null)
       {
-        return BadRequest();
+        return NotFound();
       }
 
-      if (ModelState.IsValid)
+      if (await TryUpdateModelAsync(
+          inspectionToUpdate,
+          "",
+          i => i.VehicleId, i => i.Date, i => i.Passed))
       {
         try
         {
-          await _inspectionsService.Update(inspection);
+          await _inspectionsService.Update(inspectionToUpdate);
           return RedirectToAction("Index", "Home");
         }
         catch
         {
-          // Log the error (uncomment ex variable name and write a log.)
           ModelState.AddModelError("", "Unable to save changes");
         }
       }
-      return View(inspection);
+      var user = await _userManager.GetUserAsync(HttpContext.User);
+      var vehicles = await _vehiclesService.GetAll(user.Id);
+      ViewData["Vehicles"] = new SelectList(vehicles, "Id", "Vin", inspectionToUpdate.VehicleId);
+      return View("Edit", inspectionToUpdate);
     }
 
     [Authorize]

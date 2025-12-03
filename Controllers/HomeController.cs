@@ -31,13 +31,13 @@ public class HomeController : Controller
             var twelveMonthsAgo = DateTime.UtcNow.AddMonths(-12);
             var recentPassedInspections = inspections
                 .Where(i => i.Passed && i.Date >= twelveMonthsAgo)
-                .Select(i => i.Vin)
+                .Select(i => i.VehicleId)
                 .ToHashSet();
 
             var vehicleViewModels = vehicles.Select(v => new VehicleViewModel
             {
                 Vehicle = v,
-                IsCompliant = recentPassedInspections.Contains(v.Vin)
+                IsCompliant = recentPassedInspections.Contains(v.Id)
             }).ToList();
 
             return View(new HomeViewModel { Vehicles = vehicleViewModels, Inspections = inspections });
