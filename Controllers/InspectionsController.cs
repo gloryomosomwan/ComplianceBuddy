@@ -3,7 +3,9 @@ using ComplianceBuddy.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ComplianceBuddy.Controllers
 {
@@ -41,7 +43,9 @@ namespace ComplianceBuddy.Controllers
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Inspection inspection)
     {
-      if (ModelState.IsValid)
+      inspection.Vehicle = await _vehiclesService.GetById(inspection.VehicleId);
+      ModelState.Remove(nameof(inspection.Vehicle));
+      if (TryValidateModel(inspection))
       {
         await _inspectionsService.Add(inspection);
         return RedirectToAction("Index", "Home");
@@ -49,23 +53,24 @@ namespace ComplianceBuddy.Controllers
       else
       {
         // If model is invalid, re-populate the dropdown and return the view with errors.
+        var allErrors = ModelState
+            .Where(kvp => kvp.Value.Errors.Any())
+            .Select(kvp => new
+            {
+              Key = kvp.Key,
+              Errors = kvp.Value.Errors.Select(e => e.ErrorMessage ?? e.Exception?.Message).ToList()
+            }).ToList();
+        foreach (var i in allErrors)
+        {
+          foreach (var j in i.Errors)
+          {
+            Console.WriteLine(j);
+          }
+        }
         var user = await _userManager.GetUserAsync(HttpContext.User);
         var vehicles = await _vehiclesService.GetAll(user.Id);
         ViewData["Vehicles"] = new SelectList(vehicles, "Id", "Vin", inspection.VehicleId);
-        // var allErrors = ModelState
-        //     .Where(kvp => kvp.Value.Errors.Any())
-        //     .Select(kvp => new
-        //     {
-        //       Key = kvp.Key,
-        //       Errors = kvp.Value.Errors.Select(e => e.ErrorMessage ?? e.Exception?.Message).ToList()
-        //     }).ToList();
-        // foreach (var i in allErrors)
-        // {
-        //   foreach (var j in i.Errors)
-        //   {
-        //     Console.WriteLine(j);
-        //   }
-        // }
+        ViewData["UserId"] = user.Id;
         // return RedirectToAction("Create");
         return View(inspection);
       }
