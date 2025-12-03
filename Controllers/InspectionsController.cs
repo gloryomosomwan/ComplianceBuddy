@@ -100,11 +100,12 @@ namespace ComplianceBuddy.Controllers
       {
         return NotFound();
       }
+      inspectionToUpdate.Vehicle = await _vehiclesService.GetById(inspectionToUpdate.VehicleId);
 
       if (await TryUpdateModelAsync(
           inspectionToUpdate,
           "",
-          i => i.VehicleId, i => i.Date, i => i.Passed))
+          i => i.VehicleId, i => i.Date, i => i.Passed, i => i.Vehicle))
       {
         try
         {
