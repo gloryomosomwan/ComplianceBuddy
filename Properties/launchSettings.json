@@ -7,7 +7,8 @@
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5065",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnectionString": "Server=tcp:analogue.database.windows.net,1433;Initial Catalog=ComplianceBuddy2;Persist Security Info=False;User ID=glory;Password=metrYn-myssos-1gidsa;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
       }
     },
     "https": {
