@@ -2,6 +2,8 @@
 
 ComplianceBuddy is a web application built with ASP.NET Core MVC designed to help users track vehicle compliance status based on their inspection history. 
 
+<img width="1642" height="938" alt="image" src="https://github.com/user-attachments/assets/d9e2f592-b18a-4983-8c69-fde157fe3098" />
+
 ## Technologies Used
 
 - **Backend**: ASP.NET Core MVC, C#
