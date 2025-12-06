@@ -13,7 +13,7 @@ ComplianceBuddy is a web application built with ASP.NET Core MVC designed to hel
 
 ## Usage
 
-1.  Navigate to the application URL in your browser.
+1.  Navigate to the application URL in your browser. Note: May take up to 1 minute for login page to load.
 2.  Register for a new account and log in.
 3.  From the dashboard, click **"Add Vehicle"** to add your first vehicle.
 4.  Click **"Add Inspection"** to log an inspection for a vehicle.
